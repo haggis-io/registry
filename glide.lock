@@ -1,0 +1,87 @@
+hash: cca70cef4d49361a9e7e6421da9f006b9b709fd786c72ee211ba9fcc8cc256ef
+updated: 2018-02-27T23:07:17.867025+01:00
+imports:
+- name: github.com/golang/protobuf
+  version: bbd03ef6da3a115852eaf24c8a1c46aeb39aa175
+  subpackages:
+  - proto
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
+- name: github.com/lib/pq
+  version: 88edab0803230a3898347e77b474f8c1820a1f20
+  subpackages:
+  - oid
+- name: github.com/sirupsen/logrus
+  version: 8c0189d9f6bbf301e5d055d34268156b317016af
+- name: github.com/urfave/cli
+  version: 8e01ec4cd3e2d84ab2fe90d8210528ffbb06d8ff
+- name: golang.org/x/crypto
+  version: 8c653846df49742c4c85ec37e5d9f8d3ba657895
+  subpackages:
+  - ssh/terminal
+- name: golang.org/x/net
+  version: cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: golang.org/x/sys
+  version: f6cff0780e542efa0c8e864dc8fa522808f6a598
+  subpackages:
+  - unix
+  - windows
+- name: golang.org/x/text
+  version: 27420a1a391f5504f73155051cd274311bf70883
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+- name: google.golang.org/genproto
+  version: 2d9486acae19cf9bd0c093d7dc236a323726a9e4
+  subpackages:
+  - googleapis/rpc/status
+- name: google.golang.org/grpc
+  version: a1de3b2bd6b8fd77f27fe5e1c30484ab7503e84d
+  subpackages:
+  - balancer
+  - balancer/base
+  - balancer/roundrobin
+  - codes
+  - connectivity
+  - credentials
+  - encoding
+  - encoding/proto
+  - grpclb/grpc_lb_v1/messages
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - resolver
+  - resolver/dns
+  - resolver/passthrough
+  - stats
+  - status
+  - tap
+  - transport
+- name: upper.io/db.v3
+  version: bba00b389f7e9cfdd8988e08c2832ab39119d7cf
+  subpackages:
+  - internal/cache
+  - internal/cache/hashstructure
+  - internal/immutable
+  - internal/sqladapter
+  - internal/sqladapter/compat
+  - internal/sqladapter/exql
+  - lib/reflectx
+  - lib/sqlbuilder
+  - postgresql
+testImports: []

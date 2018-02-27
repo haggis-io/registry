@@ -1,2 +1,2 @@
-# pipeline-registry
-Jenkinsfile registry
+# registry
+Registry that can store any "DataFormat", e.g Dockerfile, Jenkinsfile, .travis.yml...

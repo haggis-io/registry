@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package registry;
+
+message Entity {
+    // @inject_tag: db:"id,omitempty"
+    int64 id = 1;
+    // @inject_tag: db:"name"
+    string name = 2;
+    // @inject_tag: db:"description"
+    string description = 3;
+    // @inject_tag: db:"type"
+    string type = 4;
+    // @inject_tag: db:"created_at"
+    google.protobuf.Timestamp created_at = 5;
+    // @inject_tag: db:"updated_at"
+    google.protobuf.Timestamp updated_at = 6;
+    // @inject_tag: db:"author"
+    string author = 7;
+    // @inject_tag: db:"status"
+    Status status = 8;
+    // @inject_tag: db:"dependencies"
+    repeated Entity dependencies = 9;
+    // @inject_tag: db:"snippet"
+    Snippet snippet = 10;
+}
+
+message Snippet {
+    // @inject_tag: db:"text"
+    string text = 1;
+    // @inject_tag: db:"test_case"
+    string test_case = 2;
+}
+
+enum Status {
+    PENDING = 0;
+    APPROVED = 1;
+    DECLINED = 2;
+}

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package registry;
+
+import "entity.proto";
+
+
+service Registry {
+    rpc GetEntities (GetEntitiesRequest) returns (GetEntitiesResponse);
+    rpc GetEntity (GetEntityRequest) returns (GetEntityResponse);
+    rpc CreateEntity (CreateEntityRequest) returns (GetEntityResponse);
+    rpc MarkAsApproved(ApprovedEntityRequest) returns (ApprovedEntityResponse);
+    rpc MarkAsDeclined(DeclinedEntityRequest) returns (DeclinedEntityResponse);
+    rpc MarkAsPending(PendingEntityRequest) returns (PendingEntityResponse);
+}
+
+message GetEntitiesRequest {
+    string type = 1;
+    string author = 2;
+    Status status = 3;
+    int32 limit = 4;
+}
+
+message GetEntitiesResponse {
+    repeated Entity entities = 1;
+}
+
+message GetEntityRequest {
+    string type = 1;
+    string name = 2;
+}
+
+message GetEntityResponse {
+    Entity entity = 1;
+}
+
+message CreateEntityRequest {
+    Entity entity = 1;
+}
+
+message CreateEntityResponse {
+    Entity entity = 1;
+}
+
+message ApprovedEntityRequest {
+    string type = 1;
+    string name = 2;
+}
+
+message ApprovedEntityResponse {
+    Entity entity = 1;
+}
+
+message DeclinedEntityRequest {
+    string type = 1;
+    string name = 2;
+}
+
+message DeclinedEntityResponse {
+    Entity entity = 1;
+}
+
+message PendingEntityRequest {
+    string type = 1;
+    string name = 2;
+}
+
+message PendingEntityResponse {
+    Entity entity = 1;
+}
