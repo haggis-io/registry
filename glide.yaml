@@ -1,6 +1,8 @@
 package: github.com/haggis-io/registry
 import:
-- package: upper.io/db.v3
-  version: ^3.5.2
-  subpackages:
-  - postgresql
+- package: github.com/jinzhu/gorm
+  version: ^1.9.1
+- package: github.com/mattes/migrate
+  version: ^3.0.1
+- package: github.com/masterminds/semver
+  version: ^1.4.0

@@ -17,267 +17,267 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-type GetEntitiesRequest struct {
-	Type   string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Author string `protobuf:"bytes,2,opt,name=author" json:"author,omitempty"`
-	Status Status `protobuf:"varint,3,opt,name=status,enum=registry.Status" json:"status,omitempty"`
-	Limit  int32  `protobuf:"varint,4,opt,name=limit" json:"limit,omitempty"`
+type GetDocumentsRequest struct {
+	Version string `protobuf:"bytes,1,opt,name=version" json:"version,omitempty"`
+	Author  string `protobuf:"bytes,2,opt,name=author" json:"author,omitempty"`
+	Status  Status `protobuf:"varint,3,opt,name=status,enum=registry.Status" json:"status,omitempty"`
+	Limit   int32  `protobuf:"varint,4,opt,name=limit" json:"limit,omitempty"`
 }
 
-func (m *GetEntitiesRequest) Reset()                    { *m = GetEntitiesRequest{} }
-func (m *GetEntitiesRequest) String() string            { return proto.CompactTextString(m) }
-func (*GetEntitiesRequest) ProtoMessage()               {}
-func (*GetEntitiesRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
+func (m *GetDocumentsRequest) Reset()                    { *m = GetDocumentsRequest{} }
+func (m *GetDocumentsRequest) String() string            { return proto.CompactTextString(m) }
+func (*GetDocumentsRequest) ProtoMessage()               {}
+func (*GetDocumentsRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
-func (m *GetEntitiesRequest) GetType() string {
+func (m *GetDocumentsRequest) GetVersion() string {
 	if m != nil {
-		return m.Type
+		return m.Version
 	}
 	return ""
 }
 
-func (m *GetEntitiesRequest) GetAuthor() string {
+func (m *GetDocumentsRequest) GetAuthor() string {
 	if m != nil {
 		return m.Author
 	}
 	return ""
 }
 
-func (m *GetEntitiesRequest) GetStatus() Status {
+func (m *GetDocumentsRequest) GetStatus() Status {
 	if m != nil {
 		return m.Status
 	}
 	return Status_PENDING
 }
 
-func (m *GetEntitiesRequest) GetLimit() int32 {
+func (m *GetDocumentsRequest) GetLimit() int32 {
 	if m != nil {
 		return m.Limit
 	}
 	return 0
 }
 
-type GetEntitiesResponse struct {
-	Entities []*Entity `protobuf:"bytes,1,rep,name=entities" json:"entities,omitempty"`
+type GetDocumentsResponse struct {
+	Documents []*Document `protobuf:"bytes,1,rep,name=Documents" json:"Documents,omitempty"`
 }
 
-func (m *GetEntitiesResponse) Reset()                    { *m = GetEntitiesResponse{} }
-func (m *GetEntitiesResponse) String() string            { return proto.CompactTextString(m) }
-func (*GetEntitiesResponse) ProtoMessage()               {}
-func (*GetEntitiesResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
+func (m *GetDocumentsResponse) Reset()                    { *m = GetDocumentsResponse{} }
+func (m *GetDocumentsResponse) String() string            { return proto.CompactTextString(m) }
+func (*GetDocumentsResponse) ProtoMessage()               {}
+func (*GetDocumentsResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
 
-func (m *GetEntitiesResponse) GetEntities() []*Entity {
+func (m *GetDocumentsResponse) GetDocuments() []*Document {
 	if m != nil {
-		return m.Entities
+		return m.Documents
 	}
 	return nil
 }
 
-type GetEntityRequest struct {
-	Type string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+type GetDocumentRequest struct {
+	Name    string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=version" json:"version,omitempty"`
 }
 
-func (m *GetEntityRequest) Reset()                    { *m = GetEntityRequest{} }
-func (m *GetEntityRequest) String() string            { return proto.CompactTextString(m) }
-func (*GetEntityRequest) ProtoMessage()               {}
-func (*GetEntityRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
+func (m *GetDocumentRequest) Reset()                    { *m = GetDocumentRequest{} }
+func (m *GetDocumentRequest) String() string            { return proto.CompactTextString(m) }
+func (*GetDocumentRequest) ProtoMessage()               {}
+func (*GetDocumentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
 
-func (m *GetEntityRequest) GetType() string {
-	if m != nil {
-		return m.Type
-	}
-	return ""
-}
-
-func (m *GetEntityRequest) GetName() string {
+func (m *GetDocumentRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-type GetEntityResponse struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
-}
-
-func (m *GetEntityResponse) Reset()                    { *m = GetEntityResponse{} }
-func (m *GetEntityResponse) String() string            { return proto.CompactTextString(m) }
-func (*GetEntityResponse) ProtoMessage()               {}
-func (*GetEntityResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
-
-func (m *GetEntityResponse) GetEntity() *Entity {
+func (m *GetDocumentRequest) GetVersion() string {
 	if m != nil {
-		return m.Entity
-	}
-	return nil
-}
-
-type CreateEntityRequest struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
-}
-
-func (m *CreateEntityRequest) Reset()                    { *m = CreateEntityRequest{} }
-func (m *CreateEntityRequest) String() string            { return proto.CompactTextString(m) }
-func (*CreateEntityRequest) ProtoMessage()               {}
-func (*CreateEntityRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
-
-func (m *CreateEntityRequest) GetEntity() *Entity {
-	if m != nil {
-		return m.Entity
-	}
-	return nil
-}
-
-type CreateEntityResponse struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
-}
-
-func (m *CreateEntityResponse) Reset()                    { *m = CreateEntityResponse{} }
-func (m *CreateEntityResponse) String() string            { return proto.CompactTextString(m) }
-func (*CreateEntityResponse) ProtoMessage()               {}
-func (*CreateEntityResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
-
-func (m *CreateEntityResponse) GetEntity() *Entity {
-	if m != nil {
-		return m.Entity
-	}
-	return nil
-}
-
-type ApprovedEntityRequest struct {
-	Type string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-}
-
-func (m *ApprovedEntityRequest) Reset()                    { *m = ApprovedEntityRequest{} }
-func (m *ApprovedEntityRequest) String() string            { return proto.CompactTextString(m) }
-func (*ApprovedEntityRequest) ProtoMessage()               {}
-func (*ApprovedEntityRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
-
-func (m *ApprovedEntityRequest) GetType() string {
-	if m != nil {
-		return m.Type
+		return m.Version
 	}
 	return ""
 }
 
-func (m *ApprovedEntityRequest) GetName() string {
+type GetDocumentResponse struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
+
+func (m *GetDocumentResponse) Reset()                    { *m = GetDocumentResponse{} }
+func (m *GetDocumentResponse) String() string            { return proto.CompactTextString(m) }
+func (*GetDocumentResponse) ProtoMessage()               {}
+func (*GetDocumentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
+
+func (m *GetDocumentResponse) GetDocument() *Document {
+	if m != nil {
+		return m.Document
+	}
+	return nil
+}
+
+type CreateDocumentRequest struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
+
+func (m *CreateDocumentRequest) Reset()                    { *m = CreateDocumentRequest{} }
+func (m *CreateDocumentRequest) String() string            { return proto.CompactTextString(m) }
+func (*CreateDocumentRequest) ProtoMessage()               {}
+func (*CreateDocumentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
+
+func (m *CreateDocumentRequest) GetDocument() *Document {
+	if m != nil {
+		return m.Document
+	}
+	return nil
+}
+
+type CreateDocumentResponse struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
+
+func (m *CreateDocumentResponse) Reset()                    { *m = CreateDocumentResponse{} }
+func (m *CreateDocumentResponse) String() string            { return proto.CompactTextString(m) }
+func (*CreateDocumentResponse) ProtoMessage()               {}
+func (*CreateDocumentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
+
+func (m *CreateDocumentResponse) GetDocument() *Document {
+	if m != nil {
+		return m.Document
+	}
+	return nil
+}
+
+type ApprovedDocumentRequest struct {
+	Name    string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=version" json:"version,omitempty"`
+}
+
+func (m *ApprovedDocumentRequest) Reset()                    { *m = ApprovedDocumentRequest{} }
+func (m *ApprovedDocumentRequest) String() string            { return proto.CompactTextString(m) }
+func (*ApprovedDocumentRequest) ProtoMessage()               {}
+func (*ApprovedDocumentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
+
+func (m *ApprovedDocumentRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-type ApprovedEntityResponse struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
-}
-
-func (m *ApprovedEntityResponse) Reset()                    { *m = ApprovedEntityResponse{} }
-func (m *ApprovedEntityResponse) String() string            { return proto.CompactTextString(m) }
-func (*ApprovedEntityResponse) ProtoMessage()               {}
-func (*ApprovedEntityResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
-
-func (m *ApprovedEntityResponse) GetEntity() *Entity {
+func (m *ApprovedDocumentRequest) GetVersion() string {
 	if m != nil {
-		return m.Entity
-	}
-	return nil
-}
-
-type DeclinedEntityRequest struct {
-	Type string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-}
-
-func (m *DeclinedEntityRequest) Reset()                    { *m = DeclinedEntityRequest{} }
-func (m *DeclinedEntityRequest) String() string            { return proto.CompactTextString(m) }
-func (*DeclinedEntityRequest) ProtoMessage()               {}
-func (*DeclinedEntityRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
-
-func (m *DeclinedEntityRequest) GetType() string {
-	if m != nil {
-		return m.Type
+		return m.Version
 	}
 	return ""
 }
 
-func (m *DeclinedEntityRequest) GetName() string {
+type ApprovedDocumentResponse struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
+
+func (m *ApprovedDocumentResponse) Reset()                    { *m = ApprovedDocumentResponse{} }
+func (m *ApprovedDocumentResponse) String() string            { return proto.CompactTextString(m) }
+func (*ApprovedDocumentResponse) ProtoMessage()               {}
+func (*ApprovedDocumentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
+
+func (m *ApprovedDocumentResponse) GetDocument() *Document {
+	if m != nil {
+		return m.Document
+	}
+	return nil
+}
+
+type DeclinedDocumentRequest struct {
+	Name    string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=version" json:"version,omitempty"`
+}
+
+func (m *DeclinedDocumentRequest) Reset()                    { *m = DeclinedDocumentRequest{} }
+func (m *DeclinedDocumentRequest) String() string            { return proto.CompactTextString(m) }
+func (*DeclinedDocumentRequest) ProtoMessage()               {}
+func (*DeclinedDocumentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
+
+func (m *DeclinedDocumentRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-type DeclinedEntityResponse struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
-}
-
-func (m *DeclinedEntityResponse) Reset()                    { *m = DeclinedEntityResponse{} }
-func (m *DeclinedEntityResponse) String() string            { return proto.CompactTextString(m) }
-func (*DeclinedEntityResponse) ProtoMessage()               {}
-func (*DeclinedEntityResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{9} }
-
-func (m *DeclinedEntityResponse) GetEntity() *Entity {
+func (m *DeclinedDocumentRequest) GetVersion() string {
 	if m != nil {
-		return m.Entity
-	}
-	return nil
-}
-
-type PendingEntityRequest struct {
-	Type string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-}
-
-func (m *PendingEntityRequest) Reset()                    { *m = PendingEntityRequest{} }
-func (m *PendingEntityRequest) String() string            { return proto.CompactTextString(m) }
-func (*PendingEntityRequest) ProtoMessage()               {}
-func (*PendingEntityRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{10} }
-
-func (m *PendingEntityRequest) GetType() string {
-	if m != nil {
-		return m.Type
+		return m.Version
 	}
 	return ""
 }
 
-func (m *PendingEntityRequest) GetName() string {
+type DeclinedDocumentResponse struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
+
+func (m *DeclinedDocumentResponse) Reset()                    { *m = DeclinedDocumentResponse{} }
+func (m *DeclinedDocumentResponse) String() string            { return proto.CompactTextString(m) }
+func (*DeclinedDocumentResponse) ProtoMessage()               {}
+func (*DeclinedDocumentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{9} }
+
+func (m *DeclinedDocumentResponse) GetDocument() *Document {
+	if m != nil {
+		return m.Document
+	}
+	return nil
+}
+
+type PendingDocumentRequest struct {
+	Name    string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=version" json:"version,omitempty"`
+}
+
+func (m *PendingDocumentRequest) Reset()                    { *m = PendingDocumentRequest{} }
+func (m *PendingDocumentRequest) String() string            { return proto.CompactTextString(m) }
+func (*PendingDocumentRequest) ProtoMessage()               {}
+func (*PendingDocumentRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{10} }
+
+func (m *PendingDocumentRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-type PendingEntityResponse struct {
-	Entity *Entity `protobuf:"bytes,1,opt,name=entity" json:"entity,omitempty"`
+func (m *PendingDocumentRequest) GetVersion() string {
+	if m != nil {
+		return m.Version
+	}
+	return ""
 }
 
-func (m *PendingEntityResponse) Reset()                    { *m = PendingEntityResponse{} }
-func (m *PendingEntityResponse) String() string            { return proto.CompactTextString(m) }
-func (*PendingEntityResponse) ProtoMessage()               {}
-func (*PendingEntityResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{11} }
+type PendingDocumentResponse struct {
+	Document *Document `protobuf:"bytes,1,opt,name=Document" json:"Document,omitempty"`
+}
 
-func (m *PendingEntityResponse) GetEntity() *Entity {
+func (m *PendingDocumentResponse) Reset()                    { *m = PendingDocumentResponse{} }
+func (m *PendingDocumentResponse) String() string            { return proto.CompactTextString(m) }
+func (*PendingDocumentResponse) ProtoMessage()               {}
+func (*PendingDocumentResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{11} }
+
+func (m *PendingDocumentResponse) GetDocument() *Document {
 	if m != nil {
-		return m.Entity
+		return m.Document
 	}
 	return nil
 }
 
 func init() {
-	proto.RegisterType((*GetEntitiesRequest)(nil), "registry.GetEntitiesRequest")
-	proto.RegisterType((*GetEntitiesResponse)(nil), "registry.GetEntitiesResponse")
-	proto.RegisterType((*GetEntityRequest)(nil), "registry.GetEntityRequest")
-	proto.RegisterType((*GetEntityResponse)(nil), "registry.GetEntityResponse")
-	proto.RegisterType((*CreateEntityRequest)(nil), "registry.CreateEntityRequest")
-	proto.RegisterType((*CreateEntityResponse)(nil), "registry.CreateEntityResponse")
-	proto.RegisterType((*ApprovedEntityRequest)(nil), "registry.ApprovedEntityRequest")
-	proto.RegisterType((*ApprovedEntityResponse)(nil), "registry.ApprovedEntityResponse")
-	proto.RegisterType((*DeclinedEntityRequest)(nil), "registry.DeclinedEntityRequest")
-	proto.RegisterType((*DeclinedEntityResponse)(nil), "registry.DeclinedEntityResponse")
-	proto.RegisterType((*PendingEntityRequest)(nil), "registry.PendingEntityRequest")
-	proto.RegisterType((*PendingEntityResponse)(nil), "registry.PendingEntityResponse")
+	proto.RegisterType((*GetDocumentsRequest)(nil), "registry.GetDocumentsRequest")
+	proto.RegisterType((*GetDocumentsResponse)(nil), "registry.GetDocumentsResponse")
+	proto.RegisterType((*GetDocumentRequest)(nil), "registry.GetDocumentRequest")
+	proto.RegisterType((*GetDocumentResponse)(nil), "registry.GetDocumentResponse")
+	proto.RegisterType((*CreateDocumentRequest)(nil), "registry.CreateDocumentRequest")
+	proto.RegisterType((*CreateDocumentResponse)(nil), "registry.CreateDocumentResponse")
+	proto.RegisterType((*ApprovedDocumentRequest)(nil), "registry.ApprovedDocumentRequest")
+	proto.RegisterType((*ApprovedDocumentResponse)(nil), "registry.ApprovedDocumentResponse")
+	proto.RegisterType((*DeclinedDocumentRequest)(nil), "registry.DeclinedDocumentRequest")
+	proto.RegisterType((*DeclinedDocumentResponse)(nil), "registry.DeclinedDocumentResponse")
+	proto.RegisterType((*PendingDocumentRequest)(nil), "registry.PendingDocumentRequest")
+	proto.RegisterType((*PendingDocumentResponse)(nil), "registry.PendingDocumentResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -291,12 +291,12 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Registry service
 
 type RegistryClient interface {
-	GetEntities(ctx context.Context, in *GetEntitiesRequest, opts ...grpc.CallOption) (*GetEntitiesResponse, error)
-	GetEntity(ctx context.Context, in *GetEntityRequest, opts ...grpc.CallOption) (*GetEntityResponse, error)
-	CreateEntity(ctx context.Context, in *CreateEntityRequest, opts ...grpc.CallOption) (*GetEntityResponse, error)
-	MarkAsApproved(ctx context.Context, in *ApprovedEntityRequest, opts ...grpc.CallOption) (*ApprovedEntityResponse, error)
-	MarkAsDeclined(ctx context.Context, in *DeclinedEntityRequest, opts ...grpc.CallOption) (*DeclinedEntityResponse, error)
-	MarkAsPending(ctx context.Context, in *PendingEntityRequest, opts ...grpc.CallOption) (*PendingEntityResponse, error)
+	GetDocuments(ctx context.Context, in *GetDocumentsRequest, opts ...grpc.CallOption) (*GetDocumentsResponse, error)
+	GetDocument(ctx context.Context, in *GetDocumentRequest, opts ...grpc.CallOption) (*GetDocumentResponse, error)
+	CreateDocument(ctx context.Context, in *CreateDocumentRequest, opts ...grpc.CallOption) (*GetDocumentResponse, error)
+	MarkAsApproved(ctx context.Context, in *ApprovedDocumentRequest, opts ...grpc.CallOption) (*ApprovedDocumentResponse, error)
+	MarkAsDeclined(ctx context.Context, in *DeclinedDocumentRequest, opts ...grpc.CallOption) (*DeclinedDocumentResponse, error)
+	MarkAsPending(ctx context.Context, in *PendingDocumentRequest, opts ...grpc.CallOption) (*PendingDocumentResponse, error)
 }
 
 type registryClient struct {
@@ -307,35 +307,35 @@ func NewRegistryClient(cc *grpc.ClientConn) RegistryClient {
 	return &registryClient{cc}
 }
 
-func (c *registryClient) GetEntities(ctx context.Context, in *GetEntitiesRequest, opts ...grpc.CallOption) (*GetEntitiesResponse, error) {
-	out := new(GetEntitiesResponse)
-	err := grpc.Invoke(ctx, "/registry.Registry/GetEntities", in, out, c.cc, opts...)
+func (c *registryClient) GetDocuments(ctx context.Context, in *GetDocumentsRequest, opts ...grpc.CallOption) (*GetDocumentsResponse, error) {
+	out := new(GetDocumentsResponse)
+	err := grpc.Invoke(ctx, "/registry.Registry/GetDocuments", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registryClient) GetEntity(ctx context.Context, in *GetEntityRequest, opts ...grpc.CallOption) (*GetEntityResponse, error) {
-	out := new(GetEntityResponse)
-	err := grpc.Invoke(ctx, "/registry.Registry/GetEntity", in, out, c.cc, opts...)
+func (c *registryClient) GetDocument(ctx context.Context, in *GetDocumentRequest, opts ...grpc.CallOption) (*GetDocumentResponse, error) {
+	out := new(GetDocumentResponse)
+	err := grpc.Invoke(ctx, "/registry.Registry/GetDocument", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registryClient) CreateEntity(ctx context.Context, in *CreateEntityRequest, opts ...grpc.CallOption) (*GetEntityResponse, error) {
-	out := new(GetEntityResponse)
-	err := grpc.Invoke(ctx, "/registry.Registry/CreateEntity", in, out, c.cc, opts...)
+func (c *registryClient) CreateDocument(ctx context.Context, in *CreateDocumentRequest, opts ...grpc.CallOption) (*GetDocumentResponse, error) {
+	out := new(GetDocumentResponse)
+	err := grpc.Invoke(ctx, "/registry.Registry/CreateDocument", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registryClient) MarkAsApproved(ctx context.Context, in *ApprovedEntityRequest, opts ...grpc.CallOption) (*ApprovedEntityResponse, error) {
-	out := new(ApprovedEntityResponse)
+func (c *registryClient) MarkAsApproved(ctx context.Context, in *ApprovedDocumentRequest, opts ...grpc.CallOption) (*ApprovedDocumentResponse, error) {
+	out := new(ApprovedDocumentResponse)
 	err := grpc.Invoke(ctx, "/registry.Registry/MarkAsApproved", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -343,8 +343,8 @@ func (c *registryClient) MarkAsApproved(ctx context.Context, in *ApprovedEntityR
 	return out, nil
 }
 
-func (c *registryClient) MarkAsDeclined(ctx context.Context, in *DeclinedEntityRequest, opts ...grpc.CallOption) (*DeclinedEntityResponse, error) {
-	out := new(DeclinedEntityResponse)
+func (c *registryClient) MarkAsDeclined(ctx context.Context, in *DeclinedDocumentRequest, opts ...grpc.CallOption) (*DeclinedDocumentResponse, error) {
+	out := new(DeclinedDocumentResponse)
 	err := grpc.Invoke(ctx, "/registry.Registry/MarkAsDeclined", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -352,8 +352,8 @@ func (c *registryClient) MarkAsDeclined(ctx context.Context, in *DeclinedEntityR
 	return out, nil
 }
 
-func (c *registryClient) MarkAsPending(ctx context.Context, in *PendingEntityRequest, opts ...grpc.CallOption) (*PendingEntityResponse, error) {
-	out := new(PendingEntityResponse)
+func (c *registryClient) MarkAsPending(ctx context.Context, in *PendingDocumentRequest, opts ...grpc.CallOption) (*PendingDocumentResponse, error) {
+	out := new(PendingDocumentResponse)
 	err := grpc.Invoke(ctx, "/registry.Registry/MarkAsPending", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -364,74 +364,74 @@ func (c *registryClient) MarkAsPending(ctx context.Context, in *PendingEntityReq
 // Server API for Registry service
 
 type RegistryServer interface {
-	GetEntities(context.Context, *GetEntitiesRequest) (*GetEntitiesResponse, error)
-	GetEntity(context.Context, *GetEntityRequest) (*GetEntityResponse, error)
-	CreateEntity(context.Context, *CreateEntityRequest) (*GetEntityResponse, error)
-	MarkAsApproved(context.Context, *ApprovedEntityRequest) (*ApprovedEntityResponse, error)
-	MarkAsDeclined(context.Context, *DeclinedEntityRequest) (*DeclinedEntityResponse, error)
-	MarkAsPending(context.Context, *PendingEntityRequest) (*PendingEntityResponse, error)
+	GetDocuments(context.Context, *GetDocumentsRequest) (*GetDocumentsResponse, error)
+	GetDocument(context.Context, *GetDocumentRequest) (*GetDocumentResponse, error)
+	CreateDocument(context.Context, *CreateDocumentRequest) (*GetDocumentResponse, error)
+	MarkAsApproved(context.Context, *ApprovedDocumentRequest) (*ApprovedDocumentResponse, error)
+	MarkAsDeclined(context.Context, *DeclinedDocumentRequest) (*DeclinedDocumentResponse, error)
+	MarkAsPending(context.Context, *PendingDocumentRequest) (*PendingDocumentResponse, error)
 }
 
 func RegisterRegistryServer(s *grpc.Server, srv RegistryServer) {
 	s.RegisterService(&_Registry_serviceDesc, srv)
 }
 
-func _Registry_GetEntities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetEntitiesRequest)
+func _Registry_GetDocuments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDocumentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegistryServer).GetEntities(ctx, in)
+		return srv.(RegistryServer).GetDocuments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/registry.Registry/GetEntities",
+		FullMethod: "/registry.Registry/GetDocuments",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).GetEntities(ctx, req.(*GetEntitiesRequest))
+		return srv.(RegistryServer).GetDocuments(ctx, req.(*GetDocumentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Registry_GetEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetEntityRequest)
+func _Registry_GetDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDocumentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegistryServer).GetEntity(ctx, in)
+		return srv.(RegistryServer).GetDocument(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/registry.Registry/GetEntity",
+		FullMethod: "/registry.Registry/GetDocument",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).GetEntity(ctx, req.(*GetEntityRequest))
+		return srv.(RegistryServer).GetDocument(ctx, req.(*GetDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Registry_CreateEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateEntityRequest)
+func _Registry_CreateDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDocumentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegistryServer).CreateEntity(ctx, in)
+		return srv.(RegistryServer).CreateDocument(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/registry.Registry/CreateEntity",
+		FullMethod: "/registry.Registry/CreateDocument",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).CreateEntity(ctx, req.(*CreateEntityRequest))
+		return srv.(RegistryServer).CreateDocument(ctx, req.(*CreateDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Registry_MarkAsApproved_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApprovedEntityRequest)
+	in := new(ApprovedDocumentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -443,13 +443,13 @@ func _Registry_MarkAsApproved_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/registry.Registry/MarkAsApproved",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).MarkAsApproved(ctx, req.(*ApprovedEntityRequest))
+		return srv.(RegistryServer).MarkAsApproved(ctx, req.(*ApprovedDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Registry_MarkAsDeclined_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeclinedEntityRequest)
+	in := new(DeclinedDocumentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -461,13 +461,13 @@ func _Registry_MarkAsDeclined_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/registry.Registry/MarkAsDeclined",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).MarkAsDeclined(ctx, req.(*DeclinedEntityRequest))
+		return srv.(RegistryServer).MarkAsDeclined(ctx, req.(*DeclinedDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Registry_MarkAsPending_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PendingEntityRequest)
+	in := new(PendingDocumentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -479,7 +479,7 @@ func _Registry_MarkAsPending_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/registry.Registry/MarkAsPending",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServer).MarkAsPending(ctx, req.(*PendingEntityRequest))
+		return srv.(RegistryServer).MarkAsPending(ctx, req.(*PendingDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -489,16 +489,16 @@ var _Registry_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*RegistryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetEntities",
-			Handler:    _Registry_GetEntities_Handler,
+			MethodName: "GetDocuments",
+			Handler:    _Registry_GetDocuments_Handler,
 		},
 		{
-			MethodName: "GetEntity",
-			Handler:    _Registry_GetEntity_Handler,
+			MethodName: "GetDocument",
+			Handler:    _Registry_GetDocument_Handler,
 		},
 		{
-			MethodName: "CreateEntity",
-			Handler:    _Registry_CreateEntity_Handler,
+			MethodName: "CreateDocument",
+			Handler:    _Registry_CreateDocument_Handler,
 		},
 		{
 			MethodName: "MarkAsApproved",
@@ -520,31 +520,31 @@ var _Registry_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("registry.proto", fileDescriptor1) }
 
 var fileDescriptor1 = []byte{
-	// 406 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0x4b, 0x6f, 0xaa, 0x40,
-	0x14, 0xc7, 0xc3, 0x55, 0x89, 0x1e, 0xbd, 0xc6, 0x7b, 0x7c, 0x84, 0x70, 0x1f, 0x12, 0x56, 0x2c,
-	0x6e, 0x5c, 0xd8, 0x5d, 0x93, 0x3e, 0xac, 0x36, 0x4d, 0x4c, 0x9a, 0x18, 0xfc, 0x04, 0xb4, 0x9e,
-	0x58, 0x52, 0x05, 0xca, 0x8c, 0x4d, 0xd8, 0xf5, 0xc3, 0xf6, 0x83, 0x34, 0x85, 0x41, 0x11, 0xc1,
-	0x54, 0xba, 0x9b, 0x39, 0x8f, 0xdf, 0xf9, 0x9f, 0xf1, 0x2f, 0xd0, 0xf4, 0x69, 0x69, 0x33, 0xee,
-	0x07, 0x03, 0xcf, 0x77, 0xb9, 0x8b, 0xd5, 0xf8, 0xae, 0x36, 0xc8, 0xe1, 0x36, 0x17, 0x71, 0xfd,
-	0x4d, 0x02, 0xbc, 0x23, 0x7e, 0xfb, 0x19, 0xb3, 0x89, 0x99, 0xf4, 0xb2, 0x21, 0xc6, 0x11, 0xa1,
-	0xcc, 0x03, 0x8f, 0x14, 0x49, 0x93, 0x8c, 0x9a, 0x19, 0x9e, 0xb1, 0x07, 0xb2, 0xb5, 0xe1, 0x4f,
-	0xae, 0xaf, 0xfc, 0x08, 0xa3, 0xe2, 0x86, 0x06, 0xc8, 0x8c, 0x5b, 0x7c, 0xc3, 0x94, 0x92, 0x26,
-	0x19, 0xcd, 0x61, 0x6b, 0xb0, 0x9d, 0x3d, 0x0f, 0xe3, 0xa6, 0xc8, 0x63, 0x07, 0x2a, 0x2b, 0x7b,
-	0x6d, 0x73, 0xa5, 0xac, 0x49, 0x46, 0xc5, 0x8c, 0x2e, 0xfa, 0x18, 0xda, 0x7b, 0x0a, 0x98, 0xe7,
-	0x3a, 0x8c, 0xf0, 0x3f, 0x54, 0x49, 0xc4, 0x14, 0x49, 0x2b, 0x19, 0xf5, 0x24, 0x38, 0xac, 0x0e,
-	0xcc, 0x6d, 0x85, 0x7e, 0x0e, 0xad, 0x18, 0x12, 0x1c, 0x5b, 0x02, 0xa1, 0xec, 0x58, 0x6b, 0x12,
-	0x2b, 0x84, 0x67, 0xfd, 0x02, 0x7e, 0x25, 0x7a, 0xc5, 0x78, 0x03, 0xe4, 0xe8, 0xa1, 0xc2, 0xf6,
-	0xac, 0xe1, 0x22, 0xaf, 0x5f, 0x41, 0x7b, 0xec, 0x93, 0xc5, 0x69, 0x7f, 0xfa, 0xd7, 0x01, 0xd7,
-	0xd0, 0xd9, 0x07, 0x14, 0x90, 0xd0, 0x1d, 0x79, 0x9e, 0xef, 0xbe, 0xd2, 0xa2, 0xd8, 0x13, 0xdc,
-	0x40, 0x2f, 0x0d, 0x28, 0x22, 0x62, 0x42, 0x8f, 0x2b, 0xdb, 0xf9, 0x86, 0x88, 0x34, 0xe0, 0x64,
-	0x11, 0x97, 0xd0, 0x99, 0x91, 0xb3, 0xb0, 0x9d, 0x65, 0x31, 0x0d, 0x23, 0xe8, 0xa6, 0xfa, 0x4f,
-	0x95, 0x30, 0x7c, 0x2f, 0x41, 0xd5, 0x14, 0x39, 0x9c, 0x42, 0x3d, 0x61, 0x6e, 0xfc, 0xb3, 0xeb,
-	0x3a, 0xfc, 0xd7, 0xa9, 0x7f, 0x73, 0xb2, 0x42, 0xc2, 0x04, 0x6a, 0x5b, 0x9f, 0xa2, 0x7a, 0x58,
-	0x1b, 0x2f, 0xab, 0xfe, 0xce, 0xcc, 0x09, 0xca, 0x14, 0x1a, 0x49, 0xb7, 0x61, 0x62, 0x68, 0x86,
-	0x8d, 0x8f, 0xb3, 0xe6, 0xd0, 0xbc, 0xb7, 0xfc, 0xe7, 0x11, 0x8b, 0xcd, 0x83, 0xfd, 0x5d, 0x79,
-	0xa6, 0x23, 0x55, 0x2d, 0xbf, 0x20, 0x0d, 0x8d, 0xcd, 0x90, 0x84, 0x66, 0x3a, 0x2c, 0x09, 0xcd,
-	0x71, 0xd0, 0x0c, 0x7e, 0x46, 0x50, 0xf1, 0xeb, 0xe2, 0xbf, 0x5d, 0x4b, 0x96, 0x61, 0xd4, 0x7e,
-	0x6e, 0x3e, 0x22, 0x3e, 0xc8, 0xe1, 0x07, 0xf4, 0xec, 0x23, 0x00, 0x00, 0xff, 0xff, 0x4d, 0xa4,
-	0xc8, 0x9d, 0x6a, 0x05, 0x00, 0x00,
+	// 411 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0xdd, 0x4e, 0xea, 0x40,
+	0x14, 0x85, 0x53, 0xfe, 0x0e, 0x6c, 0xce, 0x69, 0x4e, 0x46, 0x84, 0xa6, 0x11, 0x2d, 0xbd, 0xea,
+	0x15, 0x31, 0xf8, 0x04, 0x28, 0x0a, 0x92, 0x90, 0x90, 0x6a, 0xe2, 0x75, 0x85, 0x09, 0x36, 0x42,
+	0x5b, 0x67, 0xa6, 0x24, 0x3e, 0x81, 0x8f, 0xad, 0x49, 0x3b, 0xd3, 0x1f, 0x68, 0x31, 0x16, 0xef,
+	0x98, 0xbd, 0xf6, 0xfe, 0xb2, 0xf6, 0xb0, 0xa6, 0x20, 0x13, 0xbc, 0xb2, 0x29, 0x23, 0xef, 0x7d,
+	0x8f, 0xb8, 0xcc, 0x45, 0x75, 0x71, 0x56, 0xe5, 0xa5, 0xbb, 0xf0, 0x37, 0xd8, 0x61, 0xa1, 0xa2,
+	0x7f, 0x48, 0x70, 0x32, 0xc6, 0x6c, 0xc4, 0xab, 0xd4, 0xc4, 0x6f, 0x3e, 0xa6, 0x0c, 0x29, 0xf0,
+	0x67, 0x8b, 0x09, 0xb5, 0x5d, 0x47, 0x91, 0x34, 0xc9, 0x68, 0x98, 0xe2, 0x88, 0xda, 0x50, 0xb3,
+	0x7c, 0xf6, 0xe2, 0x12, 0xa5, 0x14, 0x08, 0xfc, 0x84, 0x0c, 0xa8, 0x51, 0x66, 0x31, 0x9f, 0x2a,
+	0x65, 0x4d, 0x32, 0xe4, 0xc1, 0xff, 0x7e, 0x64, 0xe2, 0x21, 0xa8, 0x9b, 0x5c, 0x47, 0x2d, 0xa8,
+	0xae, 0xed, 0x8d, 0xcd, 0x94, 0x8a, 0x26, 0x19, 0x55, 0x33, 0x3c, 0xe8, 0x13, 0x68, 0xa5, 0x8d,
+	0x50, 0xcf, 0x75, 0x28, 0x46, 0x97, 0xd0, 0x88, 0x8a, 0x8a, 0xa4, 0x95, 0x8d, 0xe6, 0x00, 0xc5,
+	0x68, 0x21, 0x99, 0x71, 0x93, 0x7e, 0x0d, 0x28, 0x41, 0x12, 0x1b, 0x21, 0xa8, 0x38, 0xd6, 0x06,
+	0xf3, 0x75, 0x82, 0xdf, 0xc9, 0x2d, 0x4b, 0xa9, 0x2d, 0xf5, 0xdb, 0xd4, 0xb5, 0x44, 0x66, 0xfa,
+	0x50, 0x17, 0xb5, 0x00, 0x94, 0xed, 0x25, 0xea, 0xd1, 0xc7, 0x70, 0x7a, 0x43, 0xb0, 0xc5, 0xf0,
+	0xae, 0x9b, 0x9f, 0x82, 0x26, 0xd0, 0xde, 0x05, 0x15, 0xb6, 0xd4, 0x19, 0x7a, 0x1e, 0x71, 0xb7,
+	0x78, 0x79, 0xdc, 0x15, 0x4d, 0x41, 0xd9, 0x07, 0x15, 0x37, 0x35, 0xc2, 0x8b, 0xb5, 0xed, 0xfc,
+	0x82, 0xa9, 0x7d, 0x50, 0x41, 0x53, 0x77, 0xd0, 0x9e, 0x63, 0x67, 0x69, 0x3b, 0xab, 0xe3, 0x3c,
+	0xdd, 0x43, 0x67, 0x8f, 0x53, 0xcc, 0xd2, 0xe0, 0xb3, 0x0c, 0x75, 0x93, 0xeb, 0x68, 0x06, 0x7f,
+	0x93, 0x2f, 0x06, 0x75, 0xe3, 0xd1, 0x8c, 0x27, 0xad, 0x9e, 0xe7, 0xc9, 0xdc, 0xcb, 0x14, 0x9a,
+	0x89, 0x3a, 0x3a, 0xcb, 0x6c, 0x17, 0xb0, 0x6e, 0x8e, 0xca, 0x59, 0x73, 0x90, 0xd3, 0x71, 0x45,
+	0x17, 0xf1, 0x40, 0xe6, 0x8b, 0xf8, 0x8e, 0xf8, 0x04, 0xf2, 0xcc, 0x22, 0xaf, 0x43, 0x2a, 0x32,
+	0x87, 0x7a, 0xf1, 0x40, 0x4e, 0xa0, 0x55, 0xfd, 0x50, 0xcb, 0x2e, 0x58, 0xe4, 0x26, 0x09, 0xce,
+	0x09, 0x65, 0x12, 0x9c, 0x1b, 0xb7, 0x47, 0xf8, 0x17, 0x82, 0xf9, 0x9f, 0x8f, 0xb4, 0x78, 0x28,
+	0x3b, 0x57, 0x6a, 0xef, 0x40, 0x47, 0x48, 0x7d, 0xae, 0x05, 0xdf, 0xed, 0xab, 0xaf, 0x00, 0x00,
+	0x00, 0xff, 0xff, 0x57, 0x4a, 0x61, 0x42, 0xe3, 0x05, 0x00, 0x00,
 }

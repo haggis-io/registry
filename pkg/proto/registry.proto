@@ -2,69 +2,69 @@ syntax = "proto3";
 
 package registry;
 
-import "entity.proto";
+import "document.proto";
 
 
 service Registry {
-    rpc GetEntities (GetEntitiesRequest) returns (GetEntitiesResponse);
-    rpc GetEntity (GetEntityRequest) returns (GetEntityResponse);
-    rpc CreateEntity (CreateEntityRequest) returns (GetEntityResponse);
-    rpc MarkAsApproved(ApprovedEntityRequest) returns (ApprovedEntityResponse);
-    rpc MarkAsDeclined(DeclinedEntityRequest) returns (DeclinedEntityResponse);
-    rpc MarkAsPending(PendingEntityRequest) returns (PendingEntityResponse);
+    rpc GetDocuments (GetDocumentsRequest) returns (GetDocumentsResponse);
+    rpc GetDocument (GetDocumentRequest) returns (GetDocumentResponse);
+    rpc CreateDocument (CreateDocumentRequest) returns (GetDocumentResponse);
+    rpc MarkAsApproved(ApprovedDocumentRequest) returns (ApprovedDocumentResponse);
+    rpc MarkAsDeclined(DeclinedDocumentRequest) returns (DeclinedDocumentResponse);
+    rpc MarkAsPending(PendingDocumentRequest) returns (PendingDocumentResponse);
 }
 
-message GetEntitiesRequest {
-    string type = 1;
+message GetDocumentsRequest {
+    string version = 1;
     string author = 2;
     Status status = 3;
     int32 limit = 4;
 }
 
-message GetEntitiesResponse {
-    repeated Entity entities = 1;
+message GetDocumentsResponse {
+    repeated Document Documents = 1;
 }
 
-message GetEntityRequest {
-    string type = 1;
-    string name = 2;
+message GetDocumentRequest {
+    string name = 1;
+    string version = 2;
 }
 
-message GetEntityResponse {
-    Entity entity = 1;
+message GetDocumentResponse {
+    Document Document = 1;
 }
 
-message CreateEntityRequest {
-    Entity entity = 1;
+message CreateDocumentRequest {
+    Document Document = 1;
 }
 
-message CreateEntityResponse {
-    Entity entity = 1;
+message CreateDocumentResponse {
+    Document Document = 1;
 }
 
-message ApprovedEntityRequest {
-    string type = 1;
-    string name = 2;
+message ApprovedDocumentRequest {
+    string name = 1;
+    string version = 2;
 }
 
-message ApprovedEntityResponse {
-    Entity entity = 1;
+message ApprovedDocumentResponse {
+    Document Document = 1;
 }
 
-message DeclinedEntityRequest {
-    string type = 1;
-    string name = 2;
+message DeclinedDocumentRequest {
+    string name = 1;
+    string version = 2;
 }
 
-message DeclinedEntityResponse {
-    Entity entity = 1;
+message DeclinedDocumentResponse {
+    Document Document = 1;
 }
 
-message PendingEntityRequest {
-    string type = 1;
-    string name = 2;
+message PendingDocumentRequest {
+    string name = 1;
+    string version = 2;
 }
 
-message PendingEntityResponse {
-    Entity entity = 1;
+message PendingDocumentResponse {
+    Document Document = 1;
 }
