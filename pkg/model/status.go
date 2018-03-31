@@ -10,6 +10,12 @@ const (
 	StatusDECLINED Status = "DECLINED"
 )
 
+var StatusMap = map[int32]Status{
+	0: StatusPENDING,
+	1: StatusAPPROVED,
+	2: StatusDECLINED,
+}
+
 type Status string
 
 func (s *Status) Scan(value interface{}) error { *s = Status(value.([]byte)); return nil }

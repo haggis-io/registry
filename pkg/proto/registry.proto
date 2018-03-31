@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package registry;
+package api;
 
 import "document.proto";
 
@@ -15,10 +15,11 @@ service Registry {
 }
 
 message GetDocumentsRequest {
-    string version = 1;
-    string author = 2;
-    Status status = 3;
-    int32 limit = 4;
+    string name = 1;
+    string version = 2;
+    string author = 3;
+    Status status = 4;
+    int32 limit = 5;
 }
 
 message GetDocumentsResponse {

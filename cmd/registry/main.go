@@ -1,10 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/haggis-io/registry/pkg/model"
-	"github.com/haggis-io/registry/pkg/repository/document"
+	"github.com/haggis-io/registry/pkg/api"
+	"github.com/haggis-io/registry/pkg/repository"
+	"github.com/haggis-io/registry/pkg/server"
+	"github.com/haggis-io/registry/pkg/service"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/mattes/migrate"
@@ -12,8 +13,11 @@ import (
 	_ "github.com/mattes/migrate/source/file"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
+	"google.golang.org/grpc"
+	"net"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 )
 
@@ -112,6 +116,16 @@ func run() {
 
 	log.Infof("Starting %s", name)
 
+	var (
+		address  = net.JoinHostPort(addr, strconv.Itoa(port))
+		lis, err = net.Listen("tcp", address)
+		srv      = grpc.NewServer()
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	gormDB, err := gorm.Open(supportedDb, fmt.Sprintf(connectionString, databaseHost, databasePort, databaseUser, dbName, databasePass))
 	defer gormDB.Close()
 
@@ -136,63 +150,19 @@ func run() {
 	}
 
 	var (
-		documentRepository = &document.DocumentRepository{}
+		documentRepository = repository.NewDocumentRepository()
+		documentService    = service.NewRegistryService(gormDB, documentRepository)
+		documentServer     = server.NewRegistryServer(documentService)
 	)
 
-	err = documentRepository.Create(gormDB, &model.Document{
-		Description: "some description",
-		Author:      "some author",
-		Snippet: model.Snippet{
-			Text:     "some text",
-			TestCase: "s",
-		},
-		Helper: map[string]interface{}{
-			"Name":    "Java",
-			"Version": "0.1.0",
-		},
-	})
+	api.RegisterRegistryServer(srv, documentServer)
 
-	if err != nil {
-		panic(err)
-	}
-
-	scala := model.Document{
-		Description: "some description",
-		Author:      "some author",
-		Snippet: model.Snippet{
-			Text:     "some text",
-			TestCase: "s",
-		},
-		Helper: map[string]interface{}{
-			"Name":    "Scala",
-			"Version": "0.1.0",
-		},
-	}
-
-	err = documentRepository.Create(gormDB, &scala)
-
-	if err != nil {
-		panic(err)
-	}
-
-	err = gormDB.Model(&scala).Association("Dependencies").Append(&model.Document{
-		Name:    "Java",
-		Version: "0.1.0",
-	}).Error
-
-	if err != nil {
-		panic(err)
-	}
-
-	documents, err := documentRepository.GetDocuments(gormDB, "Scala")
-
-	if err != nil {
-		panic(err)
-	}
-
-	b, _ := json.Marshal(documents)
-
-	fmt.Println(string(b))
+	go func() {
+		log.Infof("GRPC server listening on %s", address)
+		if err := srv.Serve(lis); err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
@@ -201,6 +171,7 @@ func run() {
 		select {
 		case <-signalChan:
 			log.Infof("Exiting %s", name)
+			srv.GracefulStop()
 			os.Exit(0)
 		}
 	}

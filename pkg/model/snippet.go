@@ -7,5 +7,5 @@ type Snippet struct {
 	Text            string
 	TestCase        string
 	DocumentName    string
-	DocumentVersion string
+	DocumentVersion Version
 }

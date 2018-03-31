@@ -20,4 +20,4 @@ up: build
 
 generate:
 	@echo "=> generating stubs"
-	protoc -I ${PWD}/pkg/proto --proto_path=${PWD}/pkg/proto/ ${PWD}/pkg/proto/*.proto --go_out=plugins=grpc:${PWD}/pkg/proto
+	protoc -I ${PWD}/pkg/proto --proto_path=${PWD}/pkg/proto/ ${PWD}/pkg/proto/*.proto --go_out=plugins=grpc:${PWD}/pkg/api
