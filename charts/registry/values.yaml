@@ -1,0 +1,30 @@
+replicaCount: 2
+image:
+  pullPolicy: IfNotPresent
+service:
+  name: svc
+  type: ClusterIP
+  externalPort: 8080
+  internalPort: 8080
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+envvars:
+  - name: DATABASE_URL
+    value: registry-postgres:5432
+  - name: DATABASE_USER
+    value: postgres
+  - name: DATABASE_PASS
+    value: postgres
+postgresql:
+    fullname: registry-postgres
+    postgresUser: postgres
+    postgresPassword: postgres
+    persistence:
+      enabled: false

@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package api;
+
+import "document.proto";
+
+
+service Registry {
+    rpc GetDocuments (GetDocumentsRequest) returns (GetDocumentsResponse);
+    rpc GetDocument (GetDocumentRequest) returns (GetDocumentResponse);
+    rpc CreateDocument (CreateDocumentRequest) returns (GetDocumentResponse);
+    rpc MarkAsApproved(ApprovedDocumentRequest) returns (ApprovedDocumentResponse);
+    rpc MarkAsDeclined(DeclinedDocumentRequest) returns (DeclinedDocumentResponse);
+    rpc MarkAsPending(PendingDocumentRequest) returns (PendingDocumentResponse);
+}
+
+message GetDocumentsRequest {
+    string name = 1;
+    string version = 2;
+    string author = 3;
+    Status status = 4;
+    int32 limit = 5;
+}
+
+message GetDocumentsResponse {
+    repeated Document Documents = 1;
+}
+
+message GetDocumentRequest {
+    string name = 1;
+    string version = 2;
+}
+
+message GetDocumentResponse {
+    Document Document = 1;
+}
+
+message CreateDocumentRequest {
+    Document Document = 1;
+}
+
+message CreateDocumentResponse {
+    Document Document = 1;
+}
+
+message ApprovedDocumentRequest {
+    string name = 1;
+    string version = 2;
+}
+
+message ApprovedDocumentResponse {
+    Document Document = 1;
+}
+
+message DeclinedDocumentRequest {
+    string name = 1;
+    string version = 2;
+}
+
+message DeclinedDocumentResponse {
+    Document Document = 1;
+}
+
+message PendingDocumentRequest {
+    string name = 1;
+    string version = 2;
+}
+
+message PendingDocumentResponse {
+    Document Document = 1;
+}

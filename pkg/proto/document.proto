@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api;
+
+import "google/protobuf/timestamp.proto";
+
+
+
+message Document {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    string version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    string author = 7;
+    Status status = 8;
+    repeated Document dependencies = 9;
+    Snippet snippet = 10;
+}
+
+message Snippet {
+    string text = 1;
+    string test_case = 2;
+}
+
+enum Status {
+    PENDING = 0;
+    APPROVED = 1;
+    DECLINED = 2;
+}
