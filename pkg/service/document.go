@@ -7,6 +7,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"github.com/haggis-io/registry/pkg/errors"
 )
 
 type registryService struct {
@@ -31,7 +32,8 @@ func (r *registryService) GetDocuments(dq model.DocumentQuery) (out []*api.Docum
 	documents, err := r.documentRepository.List(r.db, query)
 
 	if err != nil {
-		return out, status.Error(codes.Internal, err.Error())
+		err = status.Error(codes.Internal, err.Error())
+		return
 	}
 
 	return repository.ConvertSliceInterfaceToDocumentSlice(documents), nil
@@ -42,12 +44,19 @@ func (r *registryService) GetDocument(dq model.DocumentQuery) (out *api.Document
 	query, err := dq.GenerateDetailedQuery()
 
 	if err != nil {
+		err = status.Error(codes.InvalidArgument, err.Error())
 		return
 	}
 
 	document, err := r.documentRepository.Read(r.db, query)
 
 	if err != nil {
+		if err == errors.DocumentNotFoundErr {
+			err = status.Error(codes.NotFound, err.Error())
+			return
+		}
+
+		err = status.Error(codes.Internal, err.Error())
 		return
 	}
 

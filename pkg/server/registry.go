@@ -38,7 +38,20 @@ func (r *registryServer) GetDocuments(ctx context.Context, request *api.GetDocum
 
 }
 func (r *registryServer) GetDocument(ctx context.Context, request *api.GetDocumentRequest) (*api.GetDocumentResponse, error) {
-	return nil, nil
+	query := model.DocumentQuery{
+		Name:    request.GetName(),
+		Version: model.Version(request.GetVersion()),
+	}
+
+	doc, err := r.service.GetDocument(query)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &api.GetDocumentResponse{
+		Document: doc,
+	}, nil
 }
 func (r *registryServer) CreateDocument(ctx context.Context, request *api.CreateDocumentRequest) (*api.GetDocumentResponse, error) {
 	return nil, nil

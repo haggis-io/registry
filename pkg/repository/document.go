@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/haggis-io/registry/pkg/model"
 	"github.com/jinzhu/gorm"
+	"github.com/haggis-io/registry/pkg/errors"
 )
 
 type documentRepository struct{}
@@ -16,17 +17,17 @@ func (*documentRepository) Create(tx *gorm.DB, document interface{}) error {
 }
 
 func (*documentRepository) Read(tx *gorm.DB, query model.Query) (interface{}, error) {
-	var out *model.Document
+	var out model.Document
 
 	err := query(tx).Find(&out).Error
 
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
-			return out, nil
+			return &out, errors.DocumentNotFoundErr
 		}
 		return nil, err
 	}
-	return out, nil
+	return &out, nil
 }
 
 func (*documentRepository) Update(tx *gorm.DB, document interface{}) error {
@@ -44,7 +45,7 @@ func (*documentRepository) List(tx *gorm.DB, query model.Query) ([]interface{}, 
 
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
-			return nil, nil
+			return nil, errors.DocumentNotFoundErr
 		}
 		return nil, err
 	}
