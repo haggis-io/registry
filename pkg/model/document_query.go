@@ -68,10 +68,19 @@ func (d DocumentQuery) GenerateDetailedQuery() (Query, error) {
 
 func addRequiredPreloads(tx *gorm.DB) *gorm.DB {
 	var (
-		SnippetField    = "Snippet"
-		dependencyField = "Dependencies.Snippet"
+		snippetPreloadField = "Snippet"
+		dependencyDepth1    = "Dependencies.Snippet"
+		dependencyDepth2    = "Dependencies.Dependencies.Snippet"
+		dependencyDepth3    = "Dependencies.Dependencies.Dependencies.Snippet"
+		dependencyDepth4    = "Dependencies.Dependencies.Dependencies.Dependencies.Snippet"
+		dependencyDepth5    = "Dependencies.Dependencies.Dependencies.Dependencies.Dependencies.Snippet"
 	)
-
-	return tx.Preload(SnippetField).Preload(dependencyField)
+	return tx.
+		Preload(snippetPreloadField).
+		Preload(dependencyDepth1).
+		Preload(dependencyDepth2).
+		Preload(dependencyDepth3).
+		Preload(dependencyDepth4).
+		Preload(dependencyDepth5)
 
 }
