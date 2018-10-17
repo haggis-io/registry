@@ -1,4 +1,4 @@
-package model
+package entity
 
 import (
 	"database/sql/driver"

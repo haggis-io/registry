@@ -2,53 +2,35 @@ package service
 
 import (
 	"github.com/haggis-io/registry/pkg/api"
+	"github.com/haggis-io/registry/pkg/errors"
 	"github.com/haggis-io/registry/pkg/model"
 	"github.com/haggis-io/registry/pkg/repository"
-	"github.com/jinzhu/gorm"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"github.com/haggis-io/registry/pkg/errors"
 )
 
-type registryService struct {
-	db                 *gorm.DB
-	documentRepository repository.CRUDL
+type DocumentServiceInterface interface {
+	List(dq model.DocumentQuery) ([]*api.Document, error)
+	Get(dq model.DocumentQuery) (*api.Document, error)
 }
 
-func NewRegistryService(db *gorm.DB, documentRepository repository.CRUDL) DocumentService {
-	return &registryService{
-		db:                 db,
+func NewDocumentService(documentRepository repository.DocumentRepository) *DocumentService {
+	return &DocumentService{
 		documentRepository: documentRepository,
 	}
 }
 
-func (r *registryService) GetDocuments(dq model.DocumentQuery) (out []*api.Document, err error) {
-	query, err := dq.GenerateDetailedQuery()
-
-	if err != nil {
-		return out, status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	documents, err := r.documentRepository.List(r.db, query)
-
-	if err != nil {
-		err = status.Error(codes.Internal, err.Error())
-		return
-	}
-
-	return repository.ConvertSliceInterfaceToDocumentSlice(documents), nil
-
+type DocumentService struct {
+	documentRepository repository.DocumentRepository
 }
 
-func (r *registryService) GetDocument(dq model.DocumentQuery) (out *api.Document, err error) {
-	query, err := dq.GenerateDetailedQuery()
+func (r *DocumentService) List(dq model.DocumentQuery) (out []*api.Document, err error) {
+	return r.documentRepository.List(dq)
+}
 
-	if err != nil {
-		err = status.Error(codes.InvalidArgument, err.Error())
-		return
-	}
+func (r *DocumentService) Get(dq model.DocumentQuery) (out *api.Document, err error) {
 
-	document, err := r.documentRepository.Read(r.db, query)
+	out, err = r.documentRepository.Read(dq)
 
 	if err != nil {
 		if err == errors.DocumentNotFoundErr {
@@ -60,6 +42,5 @@ func (r *registryService) GetDocument(dq model.DocumentQuery) (out *api.Document
 		return
 	}
 
-	return repository.ConvertDocumentToDocumentMessage(document.(*model.Document)), nil
-
+	return
 }

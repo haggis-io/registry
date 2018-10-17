@@ -1,9 +1,10 @@
-package model
+package entity
 
 import (
 	"errors"
-	"github.com/jinzhu/gorm"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Document struct {
