@@ -1,7 +1,8 @@
-package model
+package entity
 
 import (
 	"database/sql/driver"
+
 	"github.com/masterminds/semver"
 )
 

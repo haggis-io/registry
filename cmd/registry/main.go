@@ -2,8 +2,15 @@ package main
 
 import (
 	"fmt"
+	"net"
+	"os"
+	"os/signal"
+	"strconv"
+	"syscall"
+
+	"github.com/haggis-io/registry/pkg/storage/relational"
+
 	"github.com/haggis-io/registry/pkg/api"
-	"github.com/haggis-io/registry/pkg/repository"
 	"github.com/haggis-io/registry/pkg/server"
 	"github.com/haggis-io/registry/pkg/service"
 	"github.com/jinzhu/gorm"
@@ -14,11 +21,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 	"google.golang.org/grpc"
-	"net"
-	"os"
-	"os/signal"
-	"strconv"
-	"syscall"
 )
 
 const (
@@ -150,12 +152,12 @@ func run() {
 	}
 
 	var (
-		documentRepository = repository.NewDocumentRepository()
-		documentService    = service.NewRegistryService(gormDB, documentRepository)
-		documentServer     = server.NewRegistryServer(documentService)
+		documentRepository = relational.NewDocumentRepository(gormDB)
+		documentService    = service.NewDocumentService(documentRepository)
+		registryServer     = server.NewRegistryServer(documentService)
 	)
 
-	api.RegisterRegistryServer(srv, documentServer)
+	api.RegisterRegistryServer(srv, registryServer)
 
 	go func() {
 		log.Infof("GRPC server listening on %s", address)
